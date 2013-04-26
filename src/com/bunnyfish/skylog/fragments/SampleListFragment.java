@@ -1,7 +1,5 @@
 package com.bunnyfish.skylog.fragments;
 
-import com.bunnyfish.skylog.R;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -12,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bunnyfish.skylog.R;
+
 public class SampleListFragment extends ListFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -21,9 +21,16 @@ public class SampleListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         SampleAdapter adapter = new SampleAdapter(getActivity());
-        for (int i = 0; i < 20; i++) {
-            adapter.add(new SampleItem("Sample List", android.R.drawable.ic_menu_search));
+        String[] listValues = new String[] {
+                "Overhead",
+                "Submissions",
+                "MyLog",
+                "About" };
+        for (int i = 0; i < listValues.length; i++) {
+            adapter.add(new SampleItem(listValues[i]));
         }
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listValues);
+//            setListAdapter(adapter);
         setListAdapter(adapter);
     }
 
@@ -33,6 +40,9 @@ public class SampleListFragment extends ListFragment {
         public SampleItem(String tag, int iconRes) {
             this.tag = tag; 
             this.iconRes = iconRes;
+        }
+        public SampleItem(String tag) {
+            this.tag = tag; 
         }
     }
 
